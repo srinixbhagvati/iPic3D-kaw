@@ -1,0 +1,6 @@
+/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/build/CMakeFiles/rebuild_cache.dir
+/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/build/CMakeFiles/edit_cache.dir
+/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/build/CMakeFiles/iPic3D.dir
+/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/build/main/CMakeFiles/rebuild_cache.dir
+/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/build/main/CMakeFiles/edit_cache.dir
+/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/build/main/CMakeFiles/iPic3Dlib.dir
