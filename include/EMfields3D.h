@@ -179,6 +179,10 @@ class EMfields3D                // :public Field
     void initBEAM(VirtualTopology3D * vct, Grid * grid, Collective *col, double x_center, double y_center, double z_center, double radius);
     /*! initialize GEM challenge */
     void initGEM(VirtualTopology3D * vct, Grid * grid, Collective *col);
+    
+    //kdm addition 11/12/2020
+    void initKAW(VirtualTopology3D * vct, Grid * grid, Collective *col);
+    
     void initOriginalGEM(VirtualTopology3D * vct, Grid * grid, Collective *col);
     void initDoublePeriodicHarrisWithGaussianHumpPerturbation(VirtualTopology3D * vct, Grid * grid, Collective *col);
     /*! initialize GEM challenge with dipole-like tail without perturbation */

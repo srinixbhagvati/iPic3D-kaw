@@ -378,14 +378,6 @@ cstdlib
 cstdio
 -
 
-../include/debug.h
-stdarg.h
--
-cstdio
--
-debug.h
-../include/debug.h
-
 ../include/iPic3D.h
 MPIdata.h
 ../include/MPIdata.h
@@ -712,73 +704,13 @@ H5PTpublic.h
 H5LDpublic.h
 /home/kirit/Documents/work/codes/anaconda3/include/H5LDpublic.h
 
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/ConfigFile/src/ConfigFile.cpp
-ConfigFile.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/ConfigFile/src/ConfigFile.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/ConfigFile/src/ConfigFile.h
-string
--
-map
--
-iostream
--
-fstream
--
-sstream
--
-
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/PSKOutput3D/PSKhdf5adaptor.cpp
 PSKhdf5adaptor.h
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/PSKOutput3D/PSKhdf5adaptor.h
 
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/bc/BcFields3D.cpp
-BcFields3D.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/bc/BcFields3D.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/bc/BcParticles.cpp
-BcParticles.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/bc/BcParticles.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/ComBasic3D.cpp
-ComBasic3D.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/ComBasic3D.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/ComInterpNodes3D.cpp
-ComInterpNodes3D.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/ComInterpNodes3D.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/ComNodes3D.cpp
-ComNodes3D.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/ComNodes3D.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/ComParser3D.cpp
-ComParser3D.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/ComParser3D.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/ComParticles3D.cpp
-ComParticles3D.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/ComParticles3D.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/VCtopology3D.cpp
-VCtopology3D.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/communication/VCtopology3D.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/fields/BCStructure.cpp
-BCStructure.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/fields/BCStructure.h
-
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/fields/EMfields3D.cpp
 EMfields3D.h
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/fields/EMfields3D.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/grids/Grid3DCU.cpp
-Grid3DCU.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/grids/Grid3DCU.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/inputoutput/Collective.cpp
-Collective.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/inputoutput/Collective.h
 
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/inputoutput/ParallelIO.cpp
 fstream
@@ -792,17 +724,9 @@ MPIdata.h
 Restart3D.h
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/inputoutput/Restart3D.h
 
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/inputoutput/phdf5.cpp
-phdf5.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/inputoutput/phdf5.h
-
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/main/iPic3Dlib.cpp
 iPic3D.h
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/main/iPic3D.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/mathlib/EllipticF.cpp
-EllipticF.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/mathlib/EllipticF.h
 
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/particles/Particles3D.cpp
 iostream
@@ -882,10 +806,6 @@ vector
 complex
 -
 
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/performances/Timing.cpp
-Timing.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/performances/Timing.h
-
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/solvers/CG.cpp
 CG.h
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/solvers/CG.h
@@ -893,14 +813,6 @@ CG.h
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/solvers/GMRES.cpp
 GMRES.h
 /home/kirit/Documents/work/proj_ipic/iPic3D-kaw/solvers/GMRES.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/utility/asserts.cpp
-asserts.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/utility/asserts.h
-
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/utility/debug.cpp
-debug.h
-/home/kirit/Documents/work/proj_ipic/iPic3D-kaw/utility/debug.h
 
 /usr/lib/x86_64-linux-gnu/openmpi/include/mpi.h
 stddef.h

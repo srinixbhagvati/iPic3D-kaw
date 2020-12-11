@@ -1589,6 +1589,7 @@ void EMfields3D::initGEM(VirtualTopology3D * vct, Grid * grid, Collective *col) 
       }
       cout << "-------------------------" << endl;
     }
+
     for (int i = 0; i < nxn; i++)
       for (int j = 0; j < nyn; j++)
         for (int k = 0; k < nzn; k++) {
@@ -1642,6 +1643,12 @@ void EMfields3D::initGEM(VirtualTopology3D * vct, Grid * grid, Collective *col) 
   else {
     init(vct, grid, col);            // use the fields from restart file
   }
+}
+
+//kdm addition 11/12/2020
+void EMfields3D::initKAW(VirtualTopology3D * vct, Grid * grid, Collective *col) {
+
+
 }
 
 void EMfields3D::initOriginalGEM(VirtualTopology3D * vct, Grid * grid, Collective *col) {
