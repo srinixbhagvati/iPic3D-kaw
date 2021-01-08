@@ -1647,9 +1647,136 @@ void EMfields3D::initGEM(VirtualTopology3D * vct, Grid * grid, Collective *col) 
 
 //kdm addition 11/12/2020
 void EMfields3D::initKAW(VirtualTopology3D * vct, Grid * grid, Collective *col) {
+    
+  double dfields[8] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0}; //the ordering is ni,ne,ex,ey,ez,bx,by,bz 	
+  double *omegas=NULL;
+  int nwaves;
 
+  fstream my_file;
+  my_file.open("wave_input.txt", ios::in);
+  if (my_file) {
+      my_file >> nwaves;
+      cout << "nwaves = " << nwaves << endl;
+  } else {
+      cout << "File not found " << endl;
+      exit(0);  
+  }
+  my_file.close();
+
+  omegas = new double[nwaves];
+  cout << "omegas before call = " << omegas[0] << " " << omegas[nwaves-1] << endl;
+  calc_omegas(omegas);
+  cout << "omegas after call = " << omegas[0] << " " << omegas[nwaves-1] << endl; 
+
+  if (restart1 == 0) {
+    // initialize
+    if (vct->getCartesian_rank() == 0) {
+      cout << "------------------------------------------" << endl;
+      cout << "Initialize KAW simulation" << endl;
+      cout << "------------------------------------------" << endl;
+      cout << "B0x                              = " << B0x << endl;
+      cout << "B0y                              = " << B0y << endl;
+      cout << "B0z                              = " << B0z << endl; 
+
+      for (int i = 0; i < ns; i++) {
+        cout << "rho species " << i << " = " << rhoINIT[i];
+        if (DriftSpecies[i])
+          cout << " DRIFTING " << endl;
+        else
+          cout << " BACKGROUND " << endl;
+      }
+      cout << "-------------------------" << endl;
+    }
+      
+    cout << "print dfields before = " << dfields[0] << endl;
+    put_dfields(dfields,M_PI/5.0,0.0,0.0);
+    cout << "print dfields after = " << dfields[0] << endl;
+
+    for (int i = 0; i < nxn; i++)
+      for (int j = 0; j < nyn; j++)
+        for (int k = 0; k < nzn; k++) {
+          // initialize the density for species
+          for (int is = 0; is < ns; is++) { 
+              rhons[is][i][j][k] = rhoINIT[is] / FourPI;
+          }
+          // electric field
+          Ex[i][j][k] = 0.0;
+          Ey[i][j][k] = 0.0;
+          Ez[i][j][k] = 0.0;
+          // Magnetic field
+          Bxn[i][j][k] = B0x; // * tanh((grid->getYN(i, j, k) - Ly / 2) / delta);
+          Byn[i][j][k] = B0y;   // - (B0x/10.0)*(2*M_PI/Lx)*sin(2*M_PI*grid->getXN(i,j,k)/Lx)*cos(M_PI*(grid->getYN(i,j,k)- Ly/2)/Ly);  
+          Bzn[i][j][k] = B0z;
+        }
+    // communicate ghost
+    communicateNodeBC(nxn, nyn, nzn, Bxn, col->bcBx[0],col->bcBx[1],col->bcBx[2],col->bcBx[3],col->bcBx[4],col->bcBx[5], vct);
+    communicateNodeBC(nxn, nyn, nzn, Byn, col->bcBy[0],col->bcBy[1],col->bcBy[2],col->bcBy[3],col->bcBy[4],col->bcBy[5], vct);
+    communicateNodeBC(nxn, nyn, nzn, Bzn, col->bcBz[0],col->bcBz[1],col->bcBz[2],col->bcBz[3],col->bcBz[4],col->bcBz[5], vct);
+
+    // initialize B on centers
+    for (int i = 0; i < nxc; i++)
+      for (int j = 0; j < nyc; j++)
+        for (int k = 0; k < nzc; k++) {
+          // Magnetic field
+          Bxc[i][j][k] = B0x; // * tanh((grid->getYC(i, j, k) - Ly / 2) / delta); 
+          Byc[i][j][k] = B0y;   // - (B0x/10.0)*(2*M_PI/Lx)*sin(2*M_PI*grid->getXC(i,j,k)/Lx)*cos(M_PI*(grid->getYC(i,j,k)- Ly/2)/Ly);  
+          Bzc[i][j][k] = B0z;
+
+        }
+    // communicate ghost
+    communicateCenterBC(nxc, nyc, nzc, Bxc, col->bcBx[0],col->bcBx[1],col->bcBx[2],col->bcBx[3],col->bcBx[4],col->bcBx[5], vct);
+    communicateCenterBC(nxc, nyc, nzc, Byc, col->bcBy[0],col->bcBy[1],col->bcBy[2],col->bcBy[3],col->bcBy[4],col->bcBy[5], vct);
+    communicateCenterBC(nxc, nyc, nzc, Bzc, col->bcBz[0],col->bcBz[1],col->bcBz[2],col->bcBz[3],col->bcBz[4],col->bcBz[5], vct);
+
+
+    for (int is = 0; is < ns; is++)
+      grid->interpN2C(rhocs, is, rhons);
+  }
+  else {
+    init(vct, grid, col);            // use the fields from restart file
+  }
+  
+  delete [] omegas; 
 
 }
+
+//kdm addition 31-12-2020
+void EMfields3D::put_dfields(double arr[8], double xr, double yr, double zr) {
+
+    arr[0]=cos(xr);
+    arr[1]=2.2;
+    arr[2]=3.3;
+    arr[3]=4.4;
+    arr[4]=5.5;
+    arr[5]=6.6;
+    arr[6]=7.7;
+    arr[7]=8.8;
+}
+
+void EMfields3D::calc_omegas(double * omegas) {
+ 
+    int nks;
+    int nx,ny,nz;
+
+    fstream my_file;
+    my_file.open("wave_input.txt", ios::in);
+    if (my_file) {
+        my_file >> nks; 
+    } else {
+        cout << "File not found " << endl;
+        exit(0);  
+    }
+   
+    for (int i = 0; i < nks; i++) {
+        my_file >> nx >> ny >> nz;
+        cout << "nxyz = "<< nx << ny << nz << endl;
+        omegas[i]=i*1.0;
+    }
+    
+    my_file.close();
+
+}
+
 
 void EMfields3D::initOriginalGEM(VirtualTopology3D * vct, Grid * grid, Collective *col) {
   // perturbation localized in X
