@@ -1651,6 +1651,14 @@ void EMfields3D::initKAW(VirtualTopology3D * vct, Grid * grid, Collective *col) 
   double dfields[8] = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0}; //the ordering is ni,ne,ex,ey,ez,bx,by,bz 	
   double *omegas=NULL;
   int nwaves;
+  double vtherm[2],vaa, gamma;
+
+  vtherm[0] = sqrt(col->getUth(0)*col->getUth(0)+col->getVth(0)*col->getVth(0)+col->getWth(0)*col->getWth(0));
+  vtherm[1] = sqrt(col->getUth(1)*col->getUth(1)+col->getVth(1)*col->getVth(1)+col->getWth(1)*col->getWth(1));
+  vaa = B0x;
+  gamma = 5.0/3.0;
+
+  cout << "vaa  = " << vaa << endl;
 
   fstream my_file;
   my_file.open("wave_input.txt", ios::in);
@@ -1665,7 +1673,7 @@ void EMfields3D::initKAW(VirtualTopology3D * vct, Grid * grid, Collective *col) 
 
   omegas = new double[nwaves];
   cout << "omegas before call = " << omegas[0] << " " << omegas[nwaves-1] << endl;
-  calc_omegas(omegas);
+  calc_omegas(omegas, vtherm, vaa, gamma);
   cout << "omegas after call = " << omegas[0] << " " << omegas[nwaves-1] << endl; 
 
   if (restart1 == 0) {
@@ -1753,10 +1761,12 @@ void EMfields3D::put_dfields(double arr[8], double xr, double yr, double zr) {
     arr[7]=8.8;
 }
 
-void EMfields3D::calc_omegas(double * omegas) {
+//kdm addition 07-01-2021
+void EMfields3D::calc_omegas(double * omegas, double vtherm[2], double vaa, double gamma) {
  
     int nks;
     int nx,ny,nz;
+    double mr;
 
     fstream my_file;
     my_file.open("wave_input.txt", ios::in);
@@ -1766,7 +1776,14 @@ void EMfields3D::calc_omegas(double * omegas) {
         cout << "File not found " << endl;
         exit(0);  
     }
-   
+
+    cout << "inside calc_omegas, Lxy = " << Lx << " " << Ly << endl;
+    mr = fabs(qom[0])/fabs(qom[1]);
+    cout << "inside calc_omegas, mr= " << mr << endl;
+    cout << "inside calc_omegas vtherm= " << vtherm[0] << " "<<vtherm[1]<<endl;
+    cout << "inside calc_omegas vaa= " << vaa << endl;
+    cout << "inside calc_omegas gamma= " << gamma << endl;
+
     for (int i = 0; i < nks; i++) {
         my_file >> nx >> ny >> nz;
         cout << "nxyz = "<< nx << ny << nz << endl;

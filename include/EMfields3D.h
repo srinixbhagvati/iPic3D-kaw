@@ -183,7 +183,7 @@ class EMfields3D                // :public Field
     //kdm addition 11/12/2020
     void initKAW(VirtualTopology3D * vct, Grid * grid, Collective *col);
     void put_dfields(double arr[8], double xr, double yr, double zr);
-    void calc_omegas(double * omegas);
+    void calc_omegas(double * omegas, double vtherm[2], double vaa, double gamma);
 
     void initOriginalGEM(VirtualTopology3D * vct, Grid * grid, Collective *col);
     void initDoublePeriodicHarrisWithGaussianHumpPerturbation(VirtualTopology3D * vct, Grid * grid, Collective *col);
