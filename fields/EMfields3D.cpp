@@ -1655,7 +1655,7 @@ void EMfields3D::initKAW(VirtualTopology3D * vct, Grid * grid, Collective *col) 
 
   vtherm[0] = sqrt(col->getUth(0)*col->getUth(0)+col->getVth(0)*col->getVth(0)+col->getWth(0)*col->getWth(0));
   vtherm[1] = sqrt(col->getUth(1)*col->getUth(1)+col->getVth(1)*col->getVth(1)+col->getWth(1)*col->getWth(1));
-  vaa = B0x;
+  vaa = B0z;
   gamma = 5.0/3.0;
 
   cout << "vaa  = " << vaa << endl;
@@ -1697,7 +1697,7 @@ void EMfields3D::initKAW(VirtualTopology3D * vct, Grid * grid, Collective *col) 
     }
       
     cout << "print dfields before = " << dfields[0] << endl;
-    put_dfields(dfields,M_PI/5.0,0.0,0.0);
+    put_dfields(dfields,M_PI/5.0,M_PI/3.0,0.0);
     cout << "print dfields after = " << dfields[0] << endl;
 
     for (int i = 0; i < nxn; i++)
@@ -1751,7 +1751,7 @@ void EMfields3D::initKAW(VirtualTopology3D * vct, Grid * grid, Collective *col) 
 //kdm addition 31-12-2020
 void EMfields3D::put_dfields(double arr[8], double xr, double yr, double zr) {
 
-    arr[0]=cos(xr);
+    arr[0]=cos(yr);
     arr[1]=2.2;
     arr[2]=3.3;
     arr[3]=4.4;
@@ -1777,7 +1777,7 @@ void EMfields3D::calc_omegas(double * omegas, double vtherm[2], double vaa, doub
         exit(0);  
     }
 
-    cout << "inside calc_omegas, Lxy = " << Lx << " " << Ly << endl;
+    cout << "inside calc_omegas, Lyz = " << Ly << " " << Lz << endl;
     mr = fabs(qom[0])/fabs(qom[1]);
     cout << "inside calc_omegas, mr= " << mr << endl;
     cout << "inside calc_omegas vtherm= " << vtherm[0] << " "<<vtherm[1]<<endl;
