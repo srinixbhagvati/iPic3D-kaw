@@ -15,9 +15,9 @@ PoissonCorrection = yes                             # Poisson correction [ yes |
 SimulationName    = uniformfield                             # Simulation name for the output
 
 #  %%%%%%%%%%%%%%%%%%% Magnetic Reconnection %%%%%%%%%%%%%%%%%%
-B0x = 0.01
+B0x = 0.00
 B0y = 0.00
-B0z = 0.00
+B0z = 0.01
 
 # External magnetic field parameters:
 B1x = 0.000
@@ -37,22 +37,22 @@ Smooth = 0.5           # Smoothing value (5-points stencil)
 
 
 # %%%%%%%%%%%%%%%%%% BOX SIZE %%%%%%%%%%%%%%%
-Lx =   10.0            # Lx = simulation box length - x direction   
+Lx =   1.0            # Lx = simulation box length - x direction   
 Ly =   10.0            # Ly = simulation box length - y direction
-Lz =   1.0             # Lz = simulation box length - z direction   
+Lz =   10.0             # Lz = simulation box length - z direction   
 
 x_center =   1.        # Lx = simulation box length - x direction in m  
 y_center =   1.        # Ly = simulation box length - y direction in m
 z_center =   1.        # Lz = simulation box length - z direction in m  
 L_square =   .1
 
-nxc =  64              # nxc = number of cells - x direction        
+nxc =  1              # nxc = number of cells - x direction        
 nyc =  64              # nyc = number of cells - y direction
-nzc =  1               # nzc = number of cells - z direction        
+nzc =  64               # nzc = number of cells - z direction        
 
 # %%%%%%%%%%%%%%%%%% MPI TOPOLOGY %%%%%%%%%%%%%%%
-XLEN = 2               # Number of subdomains in the X direction
-YLEN = 1               # Number of subdomains in the X direction
+XLEN = 1               # Number of subdomains in the X direction
+YLEN = 2               # Number of subdomains in the X direction
 ZLEN = 1               # Number of subdomains in the X direction
 
 # %%%%%%%%%%%%%% PARTICLES %%%%%%%%%%%%%%%%%
@@ -75,7 +75,7 @@ qom             = -25.0    1.0        # Charge/mass ratio
 uth             = 0.0289   0.0061     # Thermal velocity in X
 vth             = 0.0289   0.0061     # Thermal velocity in Y
 wth             = 0.0289   0.0061     # Thermal velocity in Z
-u0              = 0.01      0.01        # Drift velocity in X
+u0              = 0.0      0.0        # Drift velocity in X
 v0              = 0.0      0.0        # Drift velocity in X
 w0              = 0.0      0.0        # Drift velocity in X
 
